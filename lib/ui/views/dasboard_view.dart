@@ -48,8 +48,8 @@ class DasboardView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(25, 15, 25, 20),
-            height: 150,
+            margin: EdgeInsets.fromLTRB(25, 15, 25, 15),
+            height: 130,
             width: 327,
             decoration: BoxDecoration(
                 color: kPrimaryColor,
@@ -77,7 +77,7 @@ class DasboardView extends StatelessWidget {
           ),
 
           Container(
-            margin: EdgeInsets.fromLTRB(40, 20, 40, 20  ),
+            margin: EdgeInsets.fromLTRB(45, 10, 45, 15  ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -97,10 +97,59 @@ class DasboardView extends StatelessWidget {
                   height: 110,
                   width: 110,
                 ),
-                Divider(
-                  color: kLightColor,
-                  height: 10,
-                  thickness: 2,
+              ],
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 35),
+            child: Divider(
+              thickness: 2,
+              color: kLightColor,
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 30),
+            child: TeksWidgets(
+              data: "Awas Pandemi!",
+              fontColor: Colors.black,
+              fontWeight: FontWeight.w700,
+              fontFamily: fontPopppins,
+              fontSize: 22,
+            )
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 35),
+            child: TeksWidgets(
+              data: "Ketahui tentang Covid-19 dan cara pencegahannya dengan aplikasi Peduli Diri.",
+              fontColor: kBlackColor,
+              fontWeight: FontWeight.w300,
+              fontFamily: fontPopppins,
+              fontSize: 12,
+            ),
+          ),
+          SizedBox(height: 10,),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 45),
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(7 )),
+                    color: kLightColor,
+                  ),
+                  height: 99,
+                  width: 300,
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(7 )),
+                    color: kLightColor,
+                  ),
+                  height: 99,
+                  width: 300,
                 )
               ],
             ),
