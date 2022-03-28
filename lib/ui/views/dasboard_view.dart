@@ -43,6 +43,20 @@ class DasboardView extends StatelessWidget {
       ),
       drawer: Drawer(
         backgroundColor: kPrimaryColor,
+        child: Container(
+          margin: EdgeInsets.all(40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+             InkWell(
+               child: Container(child: Text("Logout")),
+               onTap: (){
+                 Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
+               },
+             )
+            ],
+          ),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

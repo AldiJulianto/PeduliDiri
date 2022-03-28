@@ -4,13 +4,55 @@ import 'package:peduli_diri/ui/widgets/form_field_widget.dart';
 import 'package:peduli_diri/ui/widgets/title_description_widget.dart';
 import 'package:peduli_diri/utility/constans.dart';
 import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
+import 'package:peduli_diri/viewmodels/register_view_model.dart';
 
-class RegisterView extends StatelessWidget {
+class RegisterView extends StatefulWidget {
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  final _formKey = new GlobalKey<FormState>();
+
+
   final _conRegNik = TextEditingController();
   final _conRegNama = TextEditingController();
 
+  void fungtionSignUp (BuildContext context){
+    final form = _formKey.currentState;
+
+    String nik = _conRegNik.text;
+    String nama = _conRegNama.text;
+
+    // if (form!.validate()) {
+    //   alertDiaglogSucces(context, "Registrasi Berhasil");
+    // }
+
+    if(nik.isEmpty){
+      alertDialogWarning(context, "Silahkan Isi NIK Anda");
+    } 
+
+    else if (nik.length != 16 ){
+      alertDialogWarning(context, "NIK tidak valid");
+    } 
+    
+    else if (nama.isEmpty) {
+      alertDialogWarning(context, "Silahkan Isi Nama Anda");
+    } 
+
+    else if (nama.length <= 2) {
+      alertDialogWarning(context, "Nama Tidak Valid");
+    } 
+    
+    else {
+      alertDiaglogSucces(context, "Registrasi Berhasil");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -44,26 +86,29 @@ class RegisterView extends StatelessWidget {
                     ),
 
                     //Text Form Field
-                     Column(
-                    children: [
-                      //Form NIK
-                      CustomeFormField(
-                          controller: _conRegNik,
-                          iconData: Icons.credit_card_rounded,
-                          isSecure: false,
-                          textInputType: TextInputType.number,
-                          hintText: "NIK"),
-                      //Form Nama
-                      CustomeFormField(
-                        controller: _conRegNama,
-                          iconData: Icons.person_outline_rounded,
-                          isSecure: false,
-                          textInputType: TextInputType.number,
-                          hintText: "Nama Lengkap"),
-                      //Form Password
-                      
-                    ],
-                  ),
+                     Form(
+                       key: _formKey,
+                       child: Column(
+                                         children: [
+                        //Form NIK
+                        CustomeFormField(
+                            controller: _conRegNik,
+                            iconData: Icons.credit_card_rounded,
+                            isSecure: false,
+                            textInputType: TextInputType.number,
+                            hintText: "NIK"),
+                        //Form Nama
+                        CustomeFormField(
+                          controller: _conRegNama,
+                            iconData: Icons.person_outline_rounded,
+                            isSecure: false,
+                            textInputType: TextInputType.name,
+                            hintText: "Nama Lengkap"),
+                        //Form Password
+                        
+                                         ],
+                                       ),
+                     ),
 
                     SizedBox(
                       height: 120,
@@ -76,10 +121,10 @@ class RegisterView extends StatelessWidget {
                       kPrimaryColor, 
                       kWhiteColor,
                       Size(MediaQuery.of(context).size.width * 0.7, 45.0),
-                      buttonFunction: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                        loginRoute, (route) => false);
-                    }),
+                      buttonFunction: (){
+                        fungtionSignUp(context);
+                      },
+                    ),
 
                     SizedBox(
                       height: 170,
