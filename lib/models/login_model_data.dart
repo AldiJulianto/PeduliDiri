@@ -1,13 +1,13 @@
-class User {
+class UserModels {
   final String? nik;
   final String? nama;
 
-  User ({
+  UserModels ({
     this.nik,
     this.nama
   });
 
-  User.fromMap(Map<String, dynamic> res): 
+  UserModels.fromMap(Map<String, dynamic> res): 
   nik = res ["nik"],
   nama = res ["nama"];
 

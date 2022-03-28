@@ -1,3 +1,4 @@
+import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -39,5 +40,23 @@ class DbHelper {
     " PRIMARY KEY ($CNik)"
     ")");
 
+  }
+
+
+  Future<UserModel> saveData(UserModel user) async {
+    var dbClient = await db;
+    user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
+    return user;
+  }
+
+  Future<UserModel> getLoginUser(String nik,  String nama) async {
+    var dbClient = await db;
+    var res = await dbClient!.rawQuery("SELECT * FROM $tableUser  WHERE $CNik = '$nik' AND $CNama = '$nama'");
+
+
+    if (res.length > 0) {
+      return UserModel.fromMap(res.first);
+    }
+    return null!;
   }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_diri/models/user_model.dart';
+import 'package:peduli_diri/services/database_handler.dart';
 import 'package:peduli_diri/ui/widgets/costume_button_logReg.dart';
 import 'package:peduli_diri/ui/widgets/form_field_widget.dart';
 import 'package:peduli_diri/ui/widgets/title_description_widget.dart';
@@ -17,36 +19,46 @@ class _RegisterViewState extends State<RegisterView> {
 
   final _conRegNik = TextEditingController();
   final _conRegNama = TextEditingController();
+  var dbHelper;
 
-  void fungtionSignUp (BuildContext context){
-    final form = _formKey.currentState;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
+  void fungtionSignUp (BuildContext context) {
 
     String nik = _conRegNik.text;
     String nama = _conRegNama.text;
 
-    // if (form!.validate()) {
-    //   alertDiaglogSucces(context, "Registrasi Berhasil");
-    // }
-
-    if(nik.isEmpty){
-      alertDialogWarning(context, "Silahkan Isi NIK Anda");
-    } 
-
-    else if (nik.length != 16 ){
+    if (_formKey.currentState!.validate()) {
+      if (nik.length != 16 ){
       alertDialogWarning(context, "NIK tidak valid");
     } 
-    
-    else if (nama.isEmpty) {
-      alertDialogWarning(context, "Silahkan Isi Nama Anda");
-    } 
-
     else if (nama.length <= 2) {
       alertDialogWarning(context, "Nama Tidak Valid");
     } 
     
     else {
-      alertDiaglogSucces(context, "Registrasi Berhasil");
+      _formKey.currentState!.save();
+
+      UserModel uModel = UserModel(nik, nama);
+
+      dbHelper.saveData(uModel).then((userData){
+        alertDiaglogSucces(context, "Sukes");
+        Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
+        
+      }).catchError((error){
+        print("error");
+        
+      });
+      
     }
+    }
+
+    
   }
 
   @override

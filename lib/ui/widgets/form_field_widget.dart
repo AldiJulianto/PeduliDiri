@@ -24,13 +24,13 @@ class CustomeFormField extends StatelessWidget {
         controller: controller,
         keyboardType: textInputType,
         obscureText: isSecure,
-        // validator:  (value) {
-        //   if (value == null || value.isEmpty ){
-        //     return 'Silahkan isi $hintText';
-        //   }
-        //   return null;
-        // },
-        // onSaved: (val) => controller.text = val!,
+        validator:  (value) {
+          if (value == null || value.isEmpty ){
+            return 'Silahkan isi $hintText';
+          }
+          return null;
+        },
+        onSaved: (val) => controller.text = val!,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(7.0)),

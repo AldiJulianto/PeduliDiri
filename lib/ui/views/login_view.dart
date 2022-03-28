@@ -1,13 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_diri/services/database_handler.dart';
 import 'package:peduli_diri/ui/widgets/costume_button_logReg.dart';
 import 'package:peduli_diri/ui/widgets/form_field_widget.dart';
 import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
 import 'package:peduli_diri/ui/widgets/title_description_widget.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:peduli_diri/viewmodels/register_view_model.dart';
 
-class LoginView extends StatelessWidget {
-  final _conNik = TextEditingController();
-  final _conNama = TextEditingController();
+class LoginView extends StatefulWidget {
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final _formKey = new GlobalKey<FormState>();
+  final _conLogNik = TextEditingController();
+  final _conLogNama = TextEditingController();
+
+  var dbHelper;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
+  void fungtionLogin(BuildContext context) async{
+    String nik = _conLogNik.text;
+    String nama = _conLogNama.text;
+
+
+
+    if (nik.isEmpty) {
+      alertDialogWarning(context, "Silahakan Isi NIK Anda");
+    }else if (nama.isEmpty) {
+      alertDialogWarning(context, "Silahkan Isi Nama Anda");
+    } else {
+      await dbHelper.getLoginUser(nik, nama).then((userData){
+        Navigator.pushNamedAndRemoveUntil(context, DasboardRoute, (route) => false);
+      }); 
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,32 +69,37 @@ class LoginView extends StatelessWidget {
 
                   //Title and description
 
-                  CostumeTitleDescription("Welcome back", 
-                      "Saya senang bisa melihat Anda kembali untuk mencatat perjalanan anda.",
-                      emoticon,),
+                  CostumeTitleDescription(
+                    "Welcome back",
+                    "Saya senang bisa melihat Anda kembali untuk mencatat perjalanan anda.",
+                    emoticon,
+                  ),
 
                   SizedBox(
                     height: 35,
                   ),
 
                   //Text Form Field
-                  Column(
-                    children: [
-                      //Form NIK
-                      CustomeFormField(
-                          iconData: Icons.credit_card_rounded,
-                          isSecure: false,
-                          controller: _conNik,
-                          textInputType: TextInputType.number,
-                          hintText: "NIK"),
-                      //Form Password
-                      CustomeFormField(
-                          controller: _conNama,
-                          iconData: Icons.person_outline_rounded,
-                          isSecure: false,
-                          textInputType: TextInputType.name,
-                          hintText: "Nama Lengkap"),
-                    ],
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        //Form NIK
+                        CustomeFormField(
+                            iconData: Icons.credit_card_rounded,
+                            isSecure: false,
+                            controller: _conLogNik,
+                            textInputType: TextInputType.number,
+                            hintText: "NIK"),
+                        //Form Password
+                        CustomeFormField(
+                            controller: _conLogNama,
+                            iconData: Icons.person_outline_rounded,
+                            isSecure: false,
+                            textInputType: TextInputType.name,
+                            hintText: "Nama Lengkap"),
+                      ],
+                    ),
                   ),
 
                   SizedBox(
@@ -69,8 +110,7 @@ class LoginView extends StatelessWidget {
                   CostumeButtonLogReg("Masuk", kPrimaryColor, kWhiteColor,
                       Size(MediaQuery.of(context).size.width * 0.7, 45.0),
                       buttonFunction: () {
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        DasboardRoute, (route) => false);
+                        fungtionLogin(context);
                   }),
 
                   SizedBox(
@@ -89,116 +129,6 @@ class LoginView extends StatelessWidget {
   }
 
   //Title and Description
-  // Widget _titleDescription() {
-  //   return Container(
-  //     margin: EdgeInsets.only(left: 10),
-  //     child: Column(
-  //       children: [
-  //         Row(
-  //           children:[
-
-  //             Text(
-  //             "Welcome back ",
-  //             style: TextStyle(
-  //               fontFamily: fontPopppins,
-  //               fontSize: 32,
-  //               fontWeight: FontWeight.w700,
-  //               color: kPrimaryColor
-  //               ),
-  //             ),
-  //             Image.asset(emoticon,width: 38,)
-  //           ]
-  //         ),
-
-  //         Container(
-  //           padding: EdgeInsets.only(right: 30),
-  //           margin: EdgeInsets.only(left: 10),
-  //           child: TeksWidgets(
-  //            data: "I am so happy to see You can continue to login for manage your journey.",
-  //            fontColor: kBlackColor,
-  //            fontSize: 12,
-  //            fontFamily: fontPopppins,
-  //            fontWeight: FontWeight.w200,
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _textFormField () {
-  //   return Column(
-  //     children: [
-  //       Container(
-  //         height: 60,
-  //         padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //         margin: EdgeInsets.only(top: 10),
-  //         child: TextFormField(
-  //           decoration: InputDecoration(
-  //             enabledBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  //             borderSide: BorderSide(
-  //               color: Colors.transparent
-  //             )
-  //           ),
-  //         focusedBorder: OutlineInputBorder(
-  //           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-  //           borderSide: BorderSide(
-  //             color: kPrimaryColor
-  //           )
-  //         ),
-  //           prefixIcon: Icon(Icons.person_outline_outlined, color: kPrimaryColor,),
-  //           hintText: 'User Name',
-  //           fillColor: kLightColor,
-  //           filled: true
-  //           ),
-  //         ),
-  //       ),
-  //       Container(
-  //         height: 60,
-  //         padding: EdgeInsets.symmetric(horizontal: 20.0),
-  //         margin: EdgeInsets.only(top: 15),
-  //         child: TextFormField(
-  //           obscureText: true,
-  //           decoration: InputDecoration(
-  //             enabledBorder: OutlineInputBorder(
-  //             borderRadius: BorderRadius.all(Radius.circular(15.0)),
-  //             borderSide: BorderSide(
-  //               color: Colors.transparent
-  //             )
-  //           ),
-  //         focusedBorder: OutlineInputBorder(
-  //           borderRadius: BorderRadius.all(Radius.circular(30.0)),
-  //           borderSide: BorderSide(
-  //             color: kPrimaryColor
-  //           )
-  //         ),
-  //           prefixIcon: Icon(Icons.lock_outlined, color: kPrimaryColor,),
-  //           hintText: 'Password',
-  //           fillColor: kLightColor,
-  //           filled: true
-  //           ),
-  //         ),
-  //       ),
-
-  //     ],
-  //   );
-  // }
-
-  // Widget _buttonLogin (context) {
-  //   return Container(
-  //     alignment: Alignment.center,
-  //     child: ElevatedButton(
-  //       style: ElevatedButton.styleFrom(
-  //         minimumSize: Size(MediaQuery.of(context).size.width * 0.7, 45.0),
-  //         primary: kPrimaryColor
-  //       ),
-  //       child: Text("Masuk", style: TextStyle(fontFamily: fontPopppins, fontSize: 14, fontWeight: FontWeight.w600),),
-  //       onPressed: (){},
-  //     ),
-  //   );
-  // }
-
   Widget _textSignUp(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -213,7 +143,8 @@ class LoginView extends StatelessWidget {
         ),
         TextButton(
             onPressed: () {
-              Navigator.of(context).pushNamedAndRemoveUntil(RegisterRoute, (route) => false);
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil(RegisterRoute, (route) => false);
             },
             child: Text(
               "Daftar Disini",
