@@ -1,6 +1,7 @@
 # peduli_diri
 
 A new Flutter project.
+Aplikasi ini digunakan sebagai diri perjalanan di masa pandemi. Catatan perjalanan yang diisikan sekurangnya meliputi tanggal perjalanan, waktu, lokasi yang dikunjungi dan suhu tubuh saat memasuki lokasi.  Saat pertama kali digunakan, pengguna harus mengisi NIK dan nama yang akan disimpan dalam database Sqlite. Selanjutnya pengguna bisa masuk untuk mengisi catatan perjalanan.  Selain mengisi, pengguna juga dapat melakukan pencarian berdasarkan tanggal, waktu maupun lokasi. Selain itu pengguna juga dapat mengurutkan data berdasarkan tanggal perjalanan dan suhu tubuh baik secara ascending maupun descending.
 
 ## Getting Started
 

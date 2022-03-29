@@ -20,6 +20,8 @@ String iconBook = 'assets/images/iconBk.png';
 String iconBookSch = 'assets/images/iconBkSc.png';
 
 
+
+
 //ROUTING
 const String landingRoute = 'landingView';
 const String loginRoute = '/loginView';
