@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:peduli_diri/utility/constans.dart';
 import 'package:peduli_diri/viewmodels/register_view_model.dart';
 
 class CustomeFormField extends StatelessWidget {
   final String hintText;
   final IconData iconData;
+  final int maximalLength;
   final TextInputType textInputType;
   final bool isSecure;
   final TextEditingController controller;
-  CustomeFormField({required this.controller, required this.iconData, required this.isSecure, required this.textInputType, required this.hintText});
+  CustomeFormField({required this.controller, required this.iconData, required this.maximalLength, required this.isSecure, required this.textInputType, required this.hintText});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,9 @@ class CustomeFormField extends StatelessWidget {
         controller: controller,
         keyboardType: textInputType,
         obscureText: isSecure,
+        inputFormatters: [
+          LengthLimitingTextInputFormatter(maximalLength)
+        ],
         validator:  (value) {
           if (value == null || value.isEmpty ){
             return 'Silahkan isi $hintText';

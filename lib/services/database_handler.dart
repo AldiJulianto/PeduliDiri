@@ -1,4 +1,5 @@
 import 'package:peduli_diri/models/user_model.dart';
+import 'package:peduli_diri/viewmodels/register_view_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,7 +44,7 @@ class DbHelper {
   }
 
 
-  Future<UserModel> saveData(UserModel user) async {
+  Future<UserModel> saveData( UserModel user) async {
     var dbClient = await db;
     user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
     return user;

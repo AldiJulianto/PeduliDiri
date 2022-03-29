@@ -16,9 +16,13 @@ String gambarLanding = 'assets/images/landing.svg';
 String gambarLanding2 = 'assets/images/landing2.svg';
 String gambarLanding3 = 'assets/images/landing3.svg';
 String emoticon = 'assets/images/emoW.png';
+String iconBook = 'assets/images/iconBk.png';
+String iconBookSch = 'assets/images/iconBkSc.png';
+
 
 //ROUTING
 const String landingRoute = 'landingView';
 const String loginRoute = '/loginView';
 const String RegisterRoute = '/registerView';
 const String DasboardRoute = '/dasboardView';
+const String TestRoute = '/testView';

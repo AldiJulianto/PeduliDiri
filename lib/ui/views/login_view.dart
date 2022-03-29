@@ -5,6 +5,7 @@ import 'package:peduli_diri/ui/widgets/form_field_widget.dart';
 import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
 import 'package:peduli_diri/ui/widgets/title_description_widget.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:peduli_diri/viewmodels/login_view_model.dart';
 import 'package:peduli_diri/viewmodels/register_view_model.dart';
 
 class LoginView extends StatefulWidget {
@@ -38,7 +39,14 @@ class _LoginViewState extends State<LoginView> {
       alertDialogWarning(context, "Silahkan Isi Nama Anda");
     } else {
       await dbHelper.getLoginUser(nik, nama).then((userData){
-        Navigator.pushNamedAndRemoveUntil(context, DasboardRoute, (route) => false);
+        if (userData != null) {
+          alertDiaglogLoginSucces(context, "Login Berhasil");
+        } else {
+          alertDialogWarning(context, "User Tidak Ditemukan");
+        }
+
+
+        
       }); 
     }
   }
@@ -88,6 +96,7 @@ class _LoginViewState extends State<LoginView> {
                         CustomeFormField(
                             iconData: Icons.credit_card_rounded,
                             isSecure: false,
+                            maximalLength: 16,
                             controller: _conLogNik,
                             textInputType: TextInputType.number,
                             hintText: "NIK"),
@@ -95,6 +104,7 @@ class _LoginViewState extends State<LoginView> {
                         CustomeFormField(
                             controller: _conLogNama,
                             iconData: Icons.person_outline_rounded,
+                            maximalLength: 50,
                             isSecure: false,
                             textInputType: TextInputType.name,
                             hintText: "Nama Lengkap"),

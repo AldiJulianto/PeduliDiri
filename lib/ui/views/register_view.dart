@@ -48,7 +48,6 @@ class _RegisterViewState extends State<RegisterView> {
 
       dbHelper.saveData(uModel).then((userData){
         alertDiaglogSucces(context, "Sukes");
-        Navigator.pushNamedAndRemoveUntil(context, loginRoute, (route) => false);
         
       }).catchError((error){
         print("error");
@@ -106,6 +105,7 @@ class _RegisterViewState extends State<RegisterView> {
                         CustomeFormField(
                             controller: _conRegNik,
                             iconData: Icons.credit_card_rounded,
+                            maximalLength: 16,
                             isSecure: false,
                             textInputType: TextInputType.number,
                             hintText: "NIK"),
@@ -114,6 +114,7 @@ class _RegisterViewState extends State<RegisterView> {
                           controller: _conRegNama,
                             iconData: Icons.person_outline_rounded,
                             isSecure: false,
+                            maximalLength: 50,
                             textInputType: TextInputType.name,
                             hintText: "Nama Lengkap"),
                         //Form Password
