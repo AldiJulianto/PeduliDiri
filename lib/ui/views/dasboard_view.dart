@@ -44,20 +44,73 @@ class DasboardView extends StatelessWidget {
       ),
       drawer: Drawer(
         backgroundColor: kPrimaryColor,
-        child: Container(
-          margin: EdgeInsets.all(40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              InkWell(
-                child: Container(child: Text("Logout")),
-                onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, loginRoute, (route) => false);
-                },
-              )
-            ],
-          ),
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: kPrimaryColor
+              ),
+              accountName: TeksWidgets(
+                data: "323243546545456",
+                fontColor: kWhiteColor,
+                fontFamily: fontPopppins,
+                fontSize: 14,
+              ),
+              accountEmail: TeksWidgets(
+                data: "Aldi Julianto",
+                fontColor: Colors.black,
+                fontFamily: fontPopppins,
+                fontSize: 13,
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: kWhiteColor,
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.add_card_rounded,color: Colors.black,),
+              title: TeksWidgets(
+                data: "Tambah Data",
+                fontColor: Colors.black,
+                fontFamily: fontPopppins,
+                fontSize: 13,
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, AddRoute);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.history, color: Colors.black,),
+              title: TeksWidgets(
+                data: "Lihat Data",
+                fontColor: Colors.black,
+                fontFamily: fontPopppins,
+                fontSize: 13,
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.apps_outage_rounded, color: Colors.black,),
+              title: TeksWidgets(
+                data: "Tentang",
+                fontColor: Colors.black,
+                fontFamily: fontPopppins,
+                fontSize: 13,
+              ),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: Icon(Icons.logout, color: Colors.black,),
+              title: TeksWidgets(
+                data: "Keluar",
+                fontColor: Colors.black,
+                fontFamily: fontPopppins,
+                fontSize: 13,
+              ),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(context, landingRoute, (route) => false);
+              },
+            ),
+          ],
         ),
       ),
       body: Column(
@@ -65,7 +118,7 @@ class DasboardView extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.fromLTRB(25, 15, 25, 15),
-            height: 130,
+            height: 140,
             width: 375,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -119,21 +172,21 @@ class DasboardView extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, TestRoute);
+                    Navigator.pushNamed(context, AddRoute);
                   },
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: kLightColor,
                     ),
-                    height: 110,
-                    width: 110,
+                    height: 100,
+                    width: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
                           iconBook,
-                          width: 60,
+                          width: 55,
                         ),
                         SizedBox(
                           height: 8,
@@ -142,7 +195,7 @@ class DasboardView extends StatelessWidget {
                           data: "Tambah data",
                           fontColor: Colors.black,
                           fontFamily: fontPopppins,
-                          fontSize: 13,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         )
                       ],
@@ -158,14 +211,14 @@ class DasboardView extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: kLightColor,
                     ),
-                    height: 110,
-                    width: 110,
+                    height: 100,
+                    width: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Image.asset(
                           iconBookSch,
-                          width: 60,
+                          width: 55,
                         ),
                         SizedBox(
                           height: 8,
@@ -174,7 +227,7 @@ class DasboardView extends StatelessWidget {
                           data: "Lihat data",
                           fontColor: Colors.black,
                           fontFamily: fontPopppins,
-                          fontSize: 13,
+                          fontSize: 12,
                           fontWeight: FontWeight.w500,
                         )
                       ],
@@ -219,24 +272,116 @@ class DasboardView extends StatelessWidget {
             child: Column(
               children: [
                 Container(
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                     color: kLightColor,
                   ),
                   height: 99,
                   width: 300,
+
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Column(
+                          children: [
+                            Image.asset(iconVirus,width: 55,),
+                            SizedBox(height: 3,),
+                            TeksWidgets(
+                              data: "Corona Virus",
+                              fontColor: Colors.black,
+                              fontSize: 12,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 5, 0, 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TeksWidgets(
+                              data: "Ketahui Tentang Corona",
+                              fontColor: Colors.black,
+                              fontSize: 12,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            TeksWidgets(
+                              data: "Kenali virus corona dengan \nAplikasi Peduli Diri",
+                              fontColor: kBlackColor,
+                              fontSize: 10,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
+                  padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(7)),
                     color: kLightColor,
                   ),
                   height: 99,
                   width: 300,
-                )
+
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Column(
+                          children: [
+                            Image.asset(iconMask,width: 55,),
+                            SizedBox(height: 3,),
+                            TeksWidgets(
+                              data: "Pencegahan",
+                              fontColor: Colors.black,
+                              fontSize: 12,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w600,
+                            )
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(10, 5, 0, 10),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TeksWidgets(
+                              data: "Mencegah Corona",
+                              fontColor: Colors.black,
+                              fontSize: 12,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w600,
+                            ),
+                            TeksWidgets(
+                              data: "Ketahui bagaimana cara \nmencegah virus Corona.",
+                              fontColor: kBlackColor,
+                              fontSize: 10,
+                              fontFamily: fontPopppins,
+                              fontWeight: FontWeight.w300,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           )

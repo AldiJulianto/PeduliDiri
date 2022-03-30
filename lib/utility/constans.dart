@@ -18,7 +18,8 @@ String gambarLanding3 = 'assets/images/landing3.svg';
 String emoticon = 'assets/images/emoW.png';
 String iconBook = 'assets/images/iconBk.png';
 String iconBookSch = 'assets/images/iconBkSc.png';
-
+String iconVirus = 'assets/images/iconVirus.png';
+String iconMask = 'assets/images/iconMask.png';
 
 
 
@@ -28,3 +29,4 @@ const String loginRoute = '/loginView';
 const String RegisterRoute = '/registerView';
 const String DasboardRoute = '/dasboardView';
 const String TestRoute = '/testView';
+const String AddRoute = '/addDataView';
