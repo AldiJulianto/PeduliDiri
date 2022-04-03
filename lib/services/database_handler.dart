@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:flutter/material.dart';
 import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -44,9 +47,20 @@ class DbHelper {
 
 
   Future<UserModel> saveData( UserModel user) async {
-    var dbClient = await db;
-    user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
-    return user;
+
+    try {
+      var dbClient = await db;
+      user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
+      return user;      
+    } catch (e) {
+      return Future.error('Error');
+    }
+    
+    // if (user.nik.code) {
+    //   return Future.error('Error');
+    // } else{
+    //   return user;                     
+    // }
   }
 
   Future<UserModel> getLoginUser(String nik,  String nama) async {
@@ -57,6 +71,6 @@ class DbHelper {
     if (res.length > 0) {
       return UserModel.fromMap(res.first);
     }
-    return null!;
+      return Future.error('Error'); 
   }
 }
