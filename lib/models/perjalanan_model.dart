@@ -1,17 +1,21 @@
 class Perjalanan {
-  String? waktu;
+  int? id;
   String? lokasi;
-  String? tipe;
+  String? tanggal;
+  String? jam;
+  String? jenisPerjalanan;
   String? catatan;
   String? suhu;
 
   perjalananMap () {
     var mapping = Map<String, dynamic>();
-    mapping['waktu'];
-    mapping['lokasi'];
-    mapping['tipe'];
-    mapping['catatan'];
-    mapping['suhu'];
+    mapping['id']= id;
+    mapping['lokasi']=lokasi;
+    mapping['tanggal']= tanggal;
+    mapping['jam']= jam;
+    mapping['jenisPerjalanan']= jenisPerjalanan;
+    mapping['catatan']= catatan;
+    mapping['suhu']= suhu;
 
     return mapping;
   }

@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/material.dart';
 import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -18,6 +15,17 @@ class DbHelper {
   //NAMA KOLOM
   static const String CNik = 'nik';
   static const String CNama = 'nama';
+
+  //TABLE PERJALANAN
+  static const String tablePerjalanan = 'tbPerjalanan';
+  //NAMA KOLOM
+  static const String CId = 'id';
+  static const String CLokasi = 'lokasi';
+  static const String CTanggal = 'tanggal';
+  static const String CJam = 'jam';
+  static const String Cjenis = 'jenisPerjalanan';
+  static const String CCatatan = 'catatan';
+  static const String CSuhu = 'suhu';
 
   Future<Database?> get db async {
     if (_database != null) {
@@ -42,7 +50,15 @@ class DbHelper {
     " $CNama TEXT,"
     " PRIMARY KEY ($CNik)"
     ")");
-
+    await db.execute("CREATE TABLE $tablePerjalanan ("
+    " $CId INTEGER PRIMARY KEY AUTO INCREMENT, "
+    " $CLokasi TEXT, "
+    " $CTanggal TEXT, "
+    " $CJam TEXT, "
+    " $Cjenis TEXT, "
+    " $CCatatan TEXT, "
+    " $CSuhu DOUBLE,"
+    ")");
   }
 
 
