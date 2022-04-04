@@ -13,6 +13,6 @@ class DatabaseConnection {
   }
 
   _onCreatingDatabase(Database database, int version)  async{
-    database.execute("CREATE TABLE perjalanan (id_perjalanan INTEGER PRIMARY KEY AUTO INCREMENT, waktu_perjalanan TEXT, lokasi_perjalanan TEXT, tipe_perjalanan TEXT, catatan_perjalanan TEXT, suhu_tubuh TEXT)"); 
+    database.execute("CREATE TABLE perjalanan (id_perjalanan INTEGER PRIMARY KEY AUTO INCREMENT, lokasi TEXT, tanggal TEXT, jam TEXT, jenisPerjalanan TEXT, catatan TEXT, suhu TEXT)"); 
   } 
 }

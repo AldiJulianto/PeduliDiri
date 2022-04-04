@@ -4,6 +4,12 @@ import 'package:peduli_diri/utility/constans.dart';
 import 'package:intl/intl.dart';
 
 class FieldTanggal extends StatefulWidget {
+  final TextEditingController textEditingController;
+
+  const FieldTanggal ({
+    Key? key,
+    required this.textEditingController
+  });
 
   @override
   State<FieldTanggal> createState() => _FieldTanggalState();
@@ -20,7 +26,7 @@ class _FieldTanggalState extends State<FieldTanggal> {
       width: 170,
       
       child: TextField(
-        controller: dateinput,
+        controller: widget.textEditingController,
         readOnly: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -58,7 +64,7 @@ class _FieldTanggalState extends State<FieldTanggal> {
                         //you can implement different kind of Date Format here according to your requirement
 
                       setState(() {
-                         dateinput.text = formattedDate; //set output date to TextField value. 
+                         widget.textEditingController.text = formattedDate; //set output date to TextField value. 
                       });
                   }else{
                       print("Date is not selected");

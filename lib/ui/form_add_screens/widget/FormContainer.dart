@@ -1,5 +1,8 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:peduli_diri/models/perjalanan_model.dart';
+import 'package:peduli_diri/services/perjalanan_service.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/catatan.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/jam.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/jenis.dart';
@@ -7,6 +10,7 @@ import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/tanggal.dart
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/tempatSuhu.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/testJenis.dart';
 import 'package:peduli_diri/ui/shared/share_style.dart';
+import 'package:peduli_diri/ui/widgets/CostumeAlertDialog.dart';
 import 'package:peduli_diri/ui/widgets/CostumeButon.dart';
 import 'package:peduli_diri/ui/widgets/CostumeText.dart';
 import 'package:peduli_diri/utility/constans.dart';
@@ -21,6 +25,79 @@ class FormContainer extends StatefulWidget {
 
 class _FormContainerState extends State<FormContainer> {
   final _formKey = new GlobalKey<FormState>();
+  TextEditingController _lokasiController = TextEditingController();
+  TextEditingController _suhuController = TextEditingController();
+  TextEditingController _catatanController = TextEditingController();
+  TextEditingController _tanggalController = TextEditingController();
+  TextEditingController _jamController = TextEditingController();
+
+  var _perjalanan = Perjalanan();
+  var _perjalananService = PerjalananServices();
+
+
+  void addFungtion() async {
+    String lokasi=_lokasiController.text;
+    String tanggal = _tanggalController.text;
+    String jam = _jamController.text;
+    String suhu = _suhuController.text;
+    String catatan = _catatanController.text;
+
+    _perjalanan.lokasi = _lokasiController.text;
+    _perjalanan.tanggal = _tanggalController.text;
+    _perjalanan.jam = _jamController.text;
+    _perjalanan.catatan = _catatanController.text;
+    _perjalanan.suhu = _suhuController.text;
+
+   
+    
+    if (lokasi.isEmpty || lokasi == null || tanggal.isEmpty || tanggal == null || jam.isEmpty || jam == null || suhu.isEmpty) {
+      if (lokasi.isEmpty || lokasi == null) {
+        CostumeAlertDialog(
+          context, 
+          CoolAlertType.warning, 
+          "Warning", 
+          'Silahkan isi lokasi kunjungan anda', 
+          'Tutup'
+        );
+      } else if(tanggal.isEmpty || tanggal == null){
+        CostumeAlertDialog(
+          context, 
+          CoolAlertType.warning, 
+          "Warning", 
+          'Silahkan isi tanggal kunjungan anda', 
+          'Tutup'
+        );
+      } else if (jam.isEmpty || jam == null){
+          CostumeAlertDialog(
+          context, 
+          CoolAlertType.warning, 
+          "Warning", 
+          'Silahkan isi jam kunjungan anda', 
+          'Tutup'
+        );
+      } else if(suhu.isEmpty || suhu==null){
+        CostumeAlertDialog(
+          context, 
+          CoolAlertType.warning, 
+          "Warning", 
+          'Silahkan isi suhu tubuh anda', 
+          'Tutup'
+        );
+      } 
+    } else{
+      CostumeAlertDialog(
+          context, 
+          CoolAlertType.success, 
+          "Sukses", 
+          'Data Berhasil ditambahkan', 
+          'Tutup'
+        );
+
+     var result = _perjalananService.savePerjalanan(_perjalanan);
+     print(result);
+    }
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +116,7 @@ class _FormContainerState extends State<FormContainer> {
 
             FieldTmptSuhu(
               hintText: 'Lokasi yang dikunjungi',
+              textEditingController: _lokasiController,
               suffixIcon: Icons.add_location_rounded,
               textInputType: TextInputType.streetAddress,
             ),
@@ -52,8 +130,12 @@ class _FormContainerState extends State<FormContainer> {
             Container(child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FieldTanggal(),
-                FieldJam(),
+                FieldTanggal(
+                  textEditingController: _tanggalController,
+                ),
+                FieldJam(
+                  controller: _jamController,
+                ),
               ],
             )),
 
@@ -70,7 +152,9 @@ class _FormContainerState extends State<FormContainer> {
               textStyle: FmTitleFdTextStyle
             ),
             
-            FieldCatatan(),
+            FieldCatatan(
+              controller:_catatanController,
+            ),
 
             CostumeText(
               text: 'Suhu tubuh', 
@@ -81,6 +165,7 @@ class _FormContainerState extends State<FormContainer> {
               textInputType: TextInputType.numberWithOptions(
                 signed: false,
               ),
+              textEditingController: _suhuController,
               inputFormater: [
                 FilteringTextInputFormatter.allow(RegExp(r'[0-9.,]')),
                 LengthLimitingTextInputFormatter(5)
@@ -99,7 +184,7 @@ class _FormContainerState extends State<FormContainer> {
               textStyle: LrBtWhiteTextStyle, 
               colorButton: kPrimaryColor, 
               functionBt: (){
-                Navigator.pop(context);
+                addFungtion();
               }
             ),
             

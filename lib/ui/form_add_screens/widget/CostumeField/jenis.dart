@@ -37,6 +37,7 @@ class FieldJenisState extends State<FieldJenis> {
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
+          
           hint: CostumeText(text: 'Pilih kegiatan', textStyle: LrHintTextStyle),
           iconEnabledColor: kPrimaryColor,
           isExpanded: true,

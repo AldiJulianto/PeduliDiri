@@ -23,7 +23,9 @@ class CostumeDrawer extends StatelessWidget {
         CostumeListTile(
           iconData: Icons.my_library_books_rounded,
           text: 'Lihat data perjalanan', 
-          function: (){},
+          function: (){
+            Navigator.pushNamed(context, FormDataRoute);
+          },
         ),
         CostumeListTile(
           iconData: Icons.info_rounded,

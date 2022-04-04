@@ -3,6 +3,11 @@ import 'package:peduli_diri/ui/shared/share_style.dart';
 import 'package:peduli_diri/utility/constans.dart';
 
 class FieldCatatan extends StatelessWidget {
+  final TextEditingController controller;
+
+  FieldCatatan ({
+    required this.controller
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -11,7 +16,8 @@ class FieldCatatan extends StatelessWidget {
       child: TextField(
         minLines: 1,
         maxLines: 4,
-        keyboardType: TextInputType.multiline,
+        keyboardType: TextInputType.text,
+        controller: controller,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(10),
           isDense: true,

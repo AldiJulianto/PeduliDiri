@@ -32,7 +32,9 @@ class ContainerPerjalanan extends StatelessWidget {
               BoxPerjalanan(
                 text: "Lihat Data", 
                 image: iconBookSch, 
-                function: (){}
+                function: (){
+                  Navigator.pushNamed(context, FormDataRoute);
+                }
               )
             ],
           ),

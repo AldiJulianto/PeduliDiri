@@ -50,15 +50,15 @@ class DbHelper {
     " $CNama TEXT,"
     " PRIMARY KEY ($CNik)"
     ")");
-    await db.execute("CREATE TABLE $tablePerjalanan ("
-    " $CId INTEGER PRIMARY KEY AUTO INCREMENT, "
-    " $CLokasi TEXT, "
-    " $CTanggal TEXT, "
-    " $CJam TEXT, "
-    " $Cjenis TEXT, "
-    " $CCatatan TEXT, "
-    " $CSuhu DOUBLE,"
-    ")");
+    // await db.execute("CREATE TABLE $tablePerjalanan ("
+    // " $CId INTEGER PRIMARY KEY AUTO INCREMENT, "
+    // " $CLokasi TEXT, "
+    // " $CTanggal TEXT, "
+    // " $CJam TEXT, "
+    // " $Cjenis TEXT, "
+    // " $CCatatan TEXT, "
+    // " $CSuhu DOUBLE,"
+    // ")");
   }
 
 

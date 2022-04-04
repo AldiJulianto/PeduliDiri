@@ -4,6 +4,11 @@ import 'package:peduli_diri/utility/constans.dart';
 import 'package:intl/intl.dart';
 
 class FieldJam extends StatefulWidget {
+  final TextEditingController controller;
+  const FieldJam ({
+    Key? key,
+    required this.controller
+  });
 
   @override
   State<FieldJam> createState() => _FieldJamState();
@@ -20,7 +25,7 @@ class _FieldJamState extends State<FieldJam> {
       width: 115,
       
       child: TextField(
-        controller: timeinput,
+        controller: widget.controller,
         readOnly: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
@@ -53,7 +58,7 @@ class _FieldJamState extends State<FieldJam> {
                       print(newTime);  //pickedDate output format => 2021-03-10 00:00:00.000
                       String formatTime = newTime.format(context);
                       setState(() {
-                         timeinput.text = formatTime; //set output date to TextField value. 
+                         widget.controller.text = formatTime; //set output date to TextField value. 
                       });
                   }else{
                       print("Date is not selected");

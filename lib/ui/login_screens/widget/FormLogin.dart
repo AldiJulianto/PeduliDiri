@@ -117,9 +117,8 @@ class _FormLoginState extends State<FormLogin> {
             textInputType: TextInputType.name,
             inputFormater: [
               FilteringTextInputFormatter.allow(RegExp(r"[a-zA-Z]+|\s")),
-              
-              LengthLimitingTextInputFormatter(50)
-              
+              LengthLimitingTextInputFormatter(50),
+              UpperCaseTextFormatter()
             ],
             prefixIcon: Icons.person_outline_rounded,
             hintText: 'Nama Lengkap'
@@ -143,6 +142,17 @@ class _FormLoginState extends State<FormLogin> {
 
         ],
       ),
+    );
+  }
+}
+
+class UpperCaseTextFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(
+      text: newValue.text.toUpperCase(),
+      selection: newValue.selection,
     );
   }
 }

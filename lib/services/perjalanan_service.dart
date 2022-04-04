@@ -13,3 +13,15 @@ class PerjalananServices {
     return await _repositoryPerjalanan.insertData('perjalanan', perjalanan.perjalananMap());
   }
 }
+
+
+class testService {
+  saveTest(Perjalanan perjalanan) {
+    print('Lokasi Anda : ${perjalanan.lokasi}');
+    print('Tanggal Perjalanan Anda : ${perjalanan.tanggal}');
+    print('Jam : ${perjalanan.jam}');
+    print('Catatan Anda : ${perjalanan.catatan}');
+    print('Suhu tubuh anda : ${perjalanan.suhu}');
+    
+  }
+}

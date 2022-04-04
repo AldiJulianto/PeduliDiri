@@ -27,6 +27,7 @@ class _TestJenisState extends State<TestJenis> {
       height: 45,
       margin: EdgeInsets.symmetric(vertical: 10),
       child: DropdownSearch<String>(
+        
         mode: Mode.MENU,
         showSelectedItems: true,
         items: [

@@ -8,12 +8,14 @@ class FieldTmptSuhu extends StatelessWidget {
   final String? suffixText;
   final IconData suffixIcon;
   final TextInputType textInputType;
+  final TextEditingController textEditingController;
   final List<TextInputFormatter>? inputFormater;
 
   FieldTmptSuhu({
     required this.hintText,
     required this.suffixIcon,
     required this.textInputType,
+    required this.textEditingController,
     this.inputFormater,
     this.suffixText
   });
@@ -26,6 +28,7 @@ class FieldTmptSuhu extends StatelessWidget {
       
       child: TextField(
         keyboardType: textInputType,
+        controller: textEditingController,
         inputFormatters: inputFormater,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(horizontal: 10),
