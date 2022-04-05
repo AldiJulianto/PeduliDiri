@@ -31,8 +31,8 @@ class _FormContainerState extends State<FormContainer> {
   TextEditingController _tanggalController = TextEditingController();
   TextEditingController _jamController = TextEditingController();
 
-  var _perjalanan = Perjalanan();
-  var _perjalananService = PerjalananServices();
+  // var _perjalanan = Perjalanan();
+  // var _perjalananService = PerjalananServices();
 
 
   void addFungtion() async {
@@ -42,11 +42,11 @@ class _FormContainerState extends State<FormContainer> {
     String suhu = _suhuController.text;
     String catatan = _catatanController.text;
 
-    _perjalanan.lokasi = _lokasiController.text;
-    _perjalanan.tanggal = _tanggalController.text;
-    _perjalanan.jam = _jamController.text;
-    _perjalanan.catatan = _catatanController.text;
-    _perjalanan.suhu = _suhuController.text;
+    // _perjalanan.lokasi = _lokasiController.text;
+    // _perjalanan.tanggal = _tanggalController.text;
+    // _perjalanan.jam = _jamController.text;
+    // _perjalanan.catatan = _catatanController.text;
+    // _perjalanan.suhu = _suhuController.text;
 
    
     
@@ -93,8 +93,12 @@ class _FormContainerState extends State<FormContainer> {
           'Tutup'
         );
 
-     var result = _perjalananService.savePerjalanan(_perjalanan);
-     print(result);
+        print('Lokasi kunjungan anda : $lokasi');
+        print('Tanggal Perjalanan : $tanggal');
+        print('Waktu perjalanan Anda :$jam');
+        print('Catatan Perjalanan Anda : $catatan');
+        print('Suhu tubuh anda $suhu');
+        
     }
     
   }

@@ -1,3 +1,4 @@
+import 'package:peduli_diri/models/perjalanan_model.dart';
 import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -9,7 +10,7 @@ class DbHelper {
   //NAMA DATABASE
   static const String dbName = 'perjalanan.db';
   //DATABASE VERSION
-  static const int dbVersion = 1;
+  static const int dbVersion = 2;
   //NAMA TABLE
   static const String tableUser = 'user';
   //NAMA KOLOM
@@ -51,6 +52,7 @@ class DbHelper {
     " PRIMARY KEY ($CNik)"
     ")");
     // await db.execute("CREATE TABLE $tablePerjalanan ("
+    // " $cid"
     // " $CId INTEGER PRIMARY KEY AUTO INCREMENT, "
     // " $CLokasi TEXT, "
     // " $CTanggal TEXT, "
@@ -59,6 +61,10 @@ class DbHelper {
     // " $CCatatan TEXT, "
     // " $CSuhu DOUBLE,"
     // ")");
+
+//     await db.execute('''
+//     CREATE TABLE $tablePerjalanan ( $CId INTEGER PRIMARY KEY AUTO INCREMENT, $CLokasi TEXT, $CTanggal TEXT, $CJam TEXT, $Cjenis TEXT,
+//  $CCatatan TEXT,  $CSuhu DOUBLE, )''');
   }
 
 
@@ -89,4 +95,15 @@ class DbHelper {
     }
       return Future.error('Error'); 
   }
+
+  // Future<PerjalananModels> insertData(PerjalananModels perjalanan) async {
+
+  //   try {
+  //     var dbClient = await db;
+  //     perjalanan.id=(await dbClient!.insert(tablePerjalanan, perjalanan.toMap())).toInt();
+  //     return perjalanan;
+  //   } catch (e) {
+  //     return Future.error('Error');
+  //   }
+  // }
 }
