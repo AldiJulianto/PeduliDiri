@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_diri/services/database_handler.dart';
 import 'package:peduli_diri/ui/form_data_screens/widget/DataHeader.dart';
 import 'package:peduli_diri/ui/form_data_screens/widget/Search.dart';
 import 'package:peduli_diri/ui/form_data_screens/widget/SearchSort.dart';
@@ -14,6 +15,18 @@ class FormDataView extends StatefulWidget {
 }
 
 class _FormDataViewState extends State<FormDataView> {
+  var dbHelper;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    this.dbHelper = DbHelper();
+
+  }
+
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +47,12 @@ class _FormDataViewState extends State<FormDataView> {
                     ),
                      SearchSort(),
                     DataHeader(),
+                    // FutureBuilder<List>(
+                    //   future: dbHelper.getPerjalanan(),
+
+                    //   // builder: (context, snapshot)
+                    // )
+
                     
                    
                   ],

@@ -1,12 +1,14 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:peduli_diri/models/user_model.dart';
 import 'package:peduli_diri/services/database_handler.dart';
 import 'package:peduli_diri/ui/shared/share_style.dart';
 import 'package:peduli_diri/ui/widgets/CostumeAlertDialog.dart';
 import 'package:peduli_diri/ui/widgets/CostumeButon.dart';
 import 'package:peduli_diri/ui/widgets/CostumeField.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FormLogin extends StatefulWidget {
   const FormLogin({ Key? key }) : super(key: key);
@@ -17,6 +19,7 @@ class FormLogin extends StatefulWidget {
 
 class _FormLoginState extends State<FormLogin> {
   //CONTROLER
+  Future<SharedPreferences>_pref = SharedPreferences.getInstance();
 
   final _formKey = new GlobalKey<FormState>();
   final _conLogNik = TextEditingController();
@@ -75,7 +78,11 @@ class _FormLoginState extends State<FormLogin> {
     } else {
       await dbHelper.getLoginUser(nik, nama).then((userData){
         if (userData != null) {
-          CostumeAlertLogin(context);
+          setSp(userData).whenComplete((){
+            CostumeAlertLogin(context);
+          });
+
+          
         }
       }).catchError((error){
         CostumeAlertDialog(
@@ -87,6 +94,13 @@ class _FormLoginState extends State<FormLogin> {
         );
       }); 
     }
+  }
+
+  Future setSp (UserModel user) async {
+    final SharedPreferences sp = await _pref;
+
+    sp.setString('nik', user.nik!);
+    sp.setString('nama', user.nama!);
   }
 
 

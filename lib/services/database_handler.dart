@@ -1,3 +1,4 @@
+
 import 'package:peduli_diri/models/perjalanan_model.dart';
 import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -8,7 +9,7 @@ import 'dart:io' as io;
 class DbHelper {
   static Database? _database;
   //NAMA DATABASE
-  static const String dbName = 'perjalanan.db';
+  static const String dbName = 'peduli.db';
   //DATABASE VERSION
   static const int dbVersion = 2;
   //NAMA TABLE
@@ -16,9 +17,10 @@ class DbHelper {
   //NAMA KOLOM
   static const String CNik = 'nik';
   static const String CNama = 'nama';
+  static const String CFK = 'FK_data_perjalanan';
 
   //TABLE PERJALANAN
-  static const String tablePerjalanan = 'tbPerjalanan';
+  static const String tablePerjalanan = 'perjalanan';
   //NAMA KOLOM
   static const String CId = 'id';
   static const String CLokasi = 'lokasi';
@@ -46,11 +48,11 @@ class DbHelper {
   }
 
   _onCreate(Database db, int intVersion) async {
-    await db.execute("CREATE TABLE $tableUser ("
-    " $CNik TEXT, "
-    " $CNama TEXT,"
-    " PRIMARY KEY ($CNik)"
-    ")");
+    // await db.execute("CREATE TABLE $tableUser ("
+    // " $CNik TEXT, "
+    // " $CNama TEXT,"
+    // " PRIMARY KEY ($CNik)"
+    // ")");
     // await db.execute("CREATE TABLE $tablePerjalanan ("
     // " $cid"
     // " $CId INTEGER PRIMARY KEY AUTO INCREMENT, "
@@ -65,6 +67,25 @@ class DbHelper {
 //     await db.execute('''
 //     CREATE TABLE $tablePerjalanan ( $CId INTEGER PRIMARY KEY AUTO INCREMENT, $CLokasi TEXT, $CTanggal TEXT, $CJam TEXT, $Cjenis TEXT,
 //  $CCatatan TEXT,  $CSuhu DOUBLE, )''');
+    
+    await db.execute('''
+          CREATE TABLE $tableUser (
+            $CNik TEXT PRIMARY KEY,
+            $CNama TEXT,
+            $CFK INTEGER,
+            FOREIGN KEY ($CFK) REFERENCES $tablePerjalanan($CId)
+          )
+          ''');await db.execute('''
+          CREATE TABLE $tablePerjalanan (
+            $CId INTEGER PRIMARY KEY AUTOINCREMENT,
+            $CLokasi TEXT,
+            $CTanggal TEXT,
+            $CJam TEXT,
+            $Cjenis TEXT,
+            $CCatatan TEXT,
+            $CSuhu TEXT
+          )
+          ''');
   }
 
 
@@ -73,6 +94,7 @@ class DbHelper {
     try {
       var dbClient = await db;
       user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
+      print(user);
       return user;      
     } catch (e) {
       return Future.error('Error');
@@ -96,14 +118,33 @@ class DbHelper {
       return Future.error('Error'); 
   }
 
-  // Future<PerjalananModels> insertData(PerjalananModels perjalanan) async {
+  Future<PerjalananModel> insertData(PerjalananModel perjalanan) async {
 
-  //   try {
-  //     var dbClient = await db;
-  //     perjalanan.id=(await dbClient!.insert(tablePerjalanan, perjalanan.toMap())).toInt();
-  //     return perjalanan;
-  //   } catch (e) {
-  //     return Future.error('Error');
-  //   }
+    try {
+      var dbClient = await db;
+      perjalanan.id=(await dbClient!.insert(tablePerjalanan, perjalanan.toMap())).toInt();
+      print(perjalanan.id);
+      return perjalanan;
+      
+    } catch (e) {
+      return Future.error('Error');
+    }
+  }
+
+
+  // Future<List<Map<String, dynamic>>> getPerjalanan() async {
+  //   var dbClient = await db;
+  //   // var result = await dbClient!.rawQuery('SELECT * FROM $tablePerjalanan ORDER BY $CId ASC');
+  //   var result = await dbClient!.query(tablePerjalanan, orderBy: '$CId ASC');
+  //   return result.toList();
+  //   // final List<Map<String, dynamic?>> resultQuery = await dbClient!.query(tablePerjalanan, orderBy: '$CId ASC');
+  //   // return resultQuery.map((e) => PerjalananModel.fromMap(e)).toList();
   // }
+
+  Future <List<PerjalananModel>> getPerjalanan() async {
+    var dbClient = await db;
+    var result = await dbClient!.query(tablePerjalanan, orderBy: '$CId ASC');
+    List<PerjalananModel> perjalananList = result.isNotEmpty ? result.map((e) => PerjalananModel.fromMap(e)).toList() : [];
+    return perjalananList;
+  }
 }

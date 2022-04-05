@@ -42,6 +42,7 @@ dependencies:
   intl: ^0.17.0
   dropdown_search: ^2.0.1
   searchfield: ^0.6.2
+  shared_preferences: ^2.0.13
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,8 @@ import 'package:peduli_diri/ui/shared/share_style.dart';
 import 'package:peduli_diri/ui/widgets/CostumeText.dart';
 import 'package:peduli_diri/utility/constans.dart';
 
+
+
 AppBar CostumeAppBar = AppBar(
   //DESAIN
   elevation: 0,
@@ -41,6 +43,23 @@ AppBar CostumeAppBar = AppBar(
   ],
 );
 
+//  late final String nik;
+//  late final String nama;
+
+ class buatSp {
+ final  String nik;
+ final  String nama;
+
+const  buatSp(
+  {
+    required this.nik,
+    required this.nama
+  }
+);
+}
+
+
+
 Drawer CostumeDrawerBar = Drawer(
   backgroundColor: kPrimaryColor,
   child: Container(
@@ -58,11 +77,11 @@ Drawer CostumeDrawerBar = Drawer(
         UserAccountsDrawerHeader(
           decoration: BoxDecoration(color: Colors.transparent),
           accountName: CostumeText(
-            text: '1111111111111111', 
+            text: 'NIK',
             textStyle: DrawerNikTextStyle
           ), 
           accountEmail: CostumeText(
-            text: 'Aldi Jullianto', 
+            text: 'NAMA', 
             textStyle: DrawerNamaTextStyle
           ),
           currentAccountPicture: CircleAvatar(

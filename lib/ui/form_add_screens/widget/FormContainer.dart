@@ -2,10 +2,9 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:peduli_diri/models/perjalanan_model.dart';
-import 'package:peduli_diri/services/perjalanan_service.dart';
+import 'package:peduli_diri/services/database_handler.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/catatan.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/jam.dart';
-import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/jenis.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/tanggal.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/tempatSuhu.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/CostumeField/testJenis.dart';
@@ -31,11 +30,22 @@ class _FormContainerState extends State<FormContainer> {
   TextEditingController _tanggalController = TextEditingController();
   TextEditingController _jamController = TextEditingController();
 
+  var dbHelper;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    dbHelper = DbHelper();
+  }
+
   // var _perjalanan = Perjalanan();
   // var _perjalananService = PerjalananServices();
 
 
-  void addFungtion() async {
+  void addFungtion(BuildContext context) async {
+    int? id ;
+    String? jenisPerjalanan;
     String lokasi=_lokasiController.text;
     String tanggal = _tanggalController.text;
     String jam = _jamController.text;
@@ -85,19 +95,27 @@ class _FormContainerState extends State<FormContainer> {
         );
       } 
     } else{
-      CostumeAlertDialog(
+        _formKey.currentState!.save();
+        PerjalananModel pModel = PerjalananModel(id, lokasi, tanggal, jam, jenisPerjalanan, catatan, suhu);
+        dbHelper.insertData(pModel).then((perjalananData){
+          print('SUKSES LURD');
+          CostumeAlertDialog(
           context, 
           CoolAlertType.success, 
           "Sukses", 
           'Data Berhasil ditambahkan', 
           'Tutup'
         );
+        }).catchError((error) {
+          CostumeAlertDialog(context, CoolAlertType.error, error,
+              'GAGAl BOSKU', 'Tutup');
+        });
 
-        print('Lokasi kunjungan anda : $lokasi');
-        print('Tanggal Perjalanan : $tanggal');
-        print('Waktu perjalanan Anda :$jam');
-        print('Catatan Perjalanan Anda : $catatan');
-        print('Suhu tubuh anda $suhu');
+        // print('Lokasi kunjungan anda : $lokasi');
+        // print('Tanggal Perjalanan : $tanggal');
+        // print('Waktu perjalanan Anda :$jam');
+        // print('Catatan Perjalanan Anda : $catatan');
+        // print('Suhu tubuh anda $suhu');
         
     }
     
@@ -188,7 +206,7 @@ class _FormContainerState extends State<FormContainer> {
               textStyle: LrBtWhiteTextStyle, 
               colorButton: kPrimaryColor, 
               functionBt: (){
-                addFungtion();
+                addFungtion(context);
               }
             ),
             
