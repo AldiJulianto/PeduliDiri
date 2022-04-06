@@ -29,6 +29,7 @@ class _RegisterFormState extends State<RegisterForm> {
     // TODO: implement initState
     super.initState();
     dbHelper = DbHelper();
+    dbHelper.getUser();
   }
 
   void SignUpFungtion(BuildContext context) async {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_diri/ui/form_add_screens/form_add_view.dart';
 import 'package:peduli_diri/ui/form_data_screens/form_data_view.dart';
+import 'package:peduli_diri/ui/form_data_screens/testShowData.dart';
 import 'package:peduli_diri/utility/route_name.dart';
 import '../dasboard_screens/dasboard_view.dart';
 import '../landing_screens/landing_view.dart';
@@ -24,6 +25,8 @@ class RouterGenerator {
         return MaterialPageRoute(builder: (_) => FormAddView());
       case FormDataRoute:
         return MaterialPageRoute(builder: (_) => FormDataView());
+      case TestShowRoute:
+        return MaterialPageRoute(builder: (_) => TestShowData());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -32,7 +32,7 @@ class PerjalananModel {
   }
 
   PerjalananModel.fromMap(Map<String, dynamic> map) {
-    id=map['nik'];
+    id=map['id'];
     lokasi=map['lokasi'];
     tanggal=map['tanggal'];
     jam=map['jam'];

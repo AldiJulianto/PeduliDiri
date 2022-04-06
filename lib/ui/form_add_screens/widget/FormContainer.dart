@@ -37,6 +37,7 @@ class _FormContainerState extends State<FormContainer> {
     // TODO: implement initState
     super.initState();
     dbHelper = DbHelper();
+    dbHelper.getPerjalanan();
   }
 
   // var _perjalanan = Perjalanan();

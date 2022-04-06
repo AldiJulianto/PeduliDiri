@@ -1,4 +1,4 @@
-class UserModel {
+   class UserModel {
   String? nik;
   String? nama;
 

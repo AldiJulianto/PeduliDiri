@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:peduli_diri/models/perjalanan_model.dart';
 import 'package:peduli_diri/models/user_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -94,6 +96,7 @@ class DbHelper {
     try {
       var dbClient = await db;
       user.nik = (await dbClient!.insert(tableUser, user.toMap())).toString( );
+      inspect(user);
       print(user);
       return user;      
     } catch (e) {
@@ -105,6 +108,14 @@ class DbHelper {
     // } else{
     //   return user;                     
     // }
+  }
+
+  Future<List<UserModel>> getUser () async {
+    var dbClient = await db;
+    var result = await dbClient!.query(tableUser, orderBy: '$CNik ASC');
+    List<UserModel> userList = result.isNotEmpty ? result.map((e) => UserModel.fromMap(e)).toList() : [];
+    inspect(userList);
+    return userList;
   }
 
   Future<UserModel> getLoginUser(String nik,  String nama) async {
@@ -145,6 +156,7 @@ class DbHelper {
     var dbClient = await db;
     var result = await dbClient!.query(tablePerjalanan, orderBy: '$CId ASC');
     List<PerjalananModel> perjalananList = result.isNotEmpty ? result.map((e) => PerjalananModel.fromMap(e)).toList() : [];
+    inspect(perjalananList);
     return perjalananList;
   }
 }

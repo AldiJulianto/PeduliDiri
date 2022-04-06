@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_diri/models/perjalanan_model.dart';
 import 'package:peduli_diri/services/database_handler.dart';
 
 class TestShowData extends StatefulWidget {
@@ -10,22 +11,41 @@ class TestShowData extends StatefulWidget {
 
 class _TestShowDataState extends State<TestShowData> {
 
-
-  var dbHelper = DbHelper();
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
+  var dbHelper = DbHelper().getPerjalanan();
+  int count = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(child: FutureBuilder(
-        future: dbHelper.getPerjalanan(),
-        builder: ((BuildContext c))
-      )),
+      body: SafeArea(
+        child: FutureBuilder<List>(
+          future: dbHelper,
+          initialData: [],
+          builder: (context, snapshot) {
+            return snapshot.hasData?
+            new ListView.builder(
+              padding: EdgeInsets.all(9),
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, i) {
+                return _buildRow(snapshot.data![i]);
+              },
+            ): Center(child: CircularProgressIndicator(),);
+          },
+        ),
+      )
+    );
+  }
+
+  Widget _buildRow (PerjalananModel perjalananModel) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      child: Card(
+        child: ListTile(
+          title: new Text(perjalananModel.lokasi!),
+          subtitle: Text(perjalananModel.tanggal!),
+          trailing: Text(perjalananModel.jam!),
+        ),
+      ),
     );
   }
 }
