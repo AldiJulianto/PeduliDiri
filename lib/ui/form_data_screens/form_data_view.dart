@@ -8,6 +8,7 @@ import 'package:peduli_diri/ui/shared/share_style.dart';
 import 'package:peduli_diri/ui/widgets/CostumeText.dart';
 import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:peduli_diri/utility/route_name.dart';
 
 class FormDataView extends StatefulWidget {
   const FormDataView({Key? key}) : super(key: key);
@@ -42,7 +43,7 @@ class _FormDataViewState extends State<FormDataView> {
               Icons.arrow_back_ios_new_rounded,
               kPrimaryColor,
               backFunction: () {
-                Navigator.pop(context);
+                Navigator.pushNamed(context, DasboardRoute);
               },
             ),
             SearchSort(

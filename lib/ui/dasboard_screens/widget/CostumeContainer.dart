@@ -68,7 +68,7 @@ class ContainerPerjalanan extends StatelessWidget {
                 desc: 'Kenali Covid-19 dengan aplikasi\nPeduli Diri.', 
                 image: iconVirus, 
                 function: (){
-                  Navigator.popAndPushNamed(context, TestShowRoute);
+                  Navigator.pushNamed(context, FormAddRoute);
                 }
               ),
 
@@ -79,7 +79,9 @@ class ContainerPerjalanan extends StatelessWidget {
                 text: 'Antisipasi Covid-19', 
                 desc: 'Ketahui bagaimana cara\nmengantisipasi Covid-19', 
                 image: iconMask, 
-                function: (){}
+                function: (){
+                  Navigator.pushNamed(context, FormAddRoute);
+                }
               ),
             ],
           ),

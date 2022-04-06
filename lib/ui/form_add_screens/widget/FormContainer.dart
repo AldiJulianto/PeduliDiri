@@ -101,7 +101,7 @@ class _FormContainerState extends State<FormContainer> {
         PerjalananModel pModel = PerjalananModel(id, lokasi, tanggal, jam, jenisPerjalanan, catatan, suhu);
         dbHelper.insertData(pModel).then((perjalananData){
           print('SUKSES LURD');
-          CostumeAlertAdd(context, (){Navigator.pushNamedAndRemoveUntil(context, FormDataRoute, (route) => false);});
+          CostumeAlertAdd(context, (){Navigator.pushNamed(context, FormDataRoute);});
         }).catchError((error) {
           CostumeAlertDialog(context, CoolAlertType.error, error,
               'GAGAl BOSKU', 'Tutup');
