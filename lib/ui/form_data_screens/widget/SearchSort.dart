@@ -3,7 +3,12 @@ import 'package:peduli_diri/ui/form_data_screens/widget/Search.dart';
 import 'package:peduli_diri/ui/form_data_screens/widget/Sort.dart';
 
 class SearchSort extends StatefulWidget {
-  const SearchSort({ Key? key }) : super(key: key);
+  final TextEditingController controller;
+
+  const SearchSort({
+    Key? key,
+    required this.controller
+  });
 
   @override
   State<SearchSort> createState() => _SearchSortState();
@@ -18,7 +23,7 @@ class _SearchSortState extends State<SearchSort> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
         children: [
-          CostumeSearch(),
+          CostumeSearch(controller: widget.controller),
           CostumeSort()
         ],
       ),

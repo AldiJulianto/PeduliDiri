@@ -21,7 +21,7 @@ class BoxPandemi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){function;},
+      onTap: function != null ? () => function():null,
       child: Container(
         padding: const EdgeInsets.fromLTRB(15, 10, 15, 10),
         decoration: const BoxDecoration(

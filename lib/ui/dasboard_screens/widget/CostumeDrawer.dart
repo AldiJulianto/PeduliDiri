@@ -58,7 +58,7 @@ class CostumeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(iconData, color: kBlackPrimaryColor,),
+      leading: Icon(iconData, color: kWhiteColor,),
       title: CostumeText(
         text: text, 
         textStyle: DrawerNamaTextStyle

@@ -55,3 +55,21 @@ CostumeAlertRegister(BuildContext context) {
     },
   );
 }
+
+CostumeAlertAdd(BuildContext context, Function function) {
+  CoolAlert.show(
+    context: context,
+    type: CoolAlertType.warning,
+    title: 'Perhatian!',
+    text: 'Apakah data yang Anda masukan sudah benar? Data yang sudah dimasukan tidak dapat dihapus kembali',
+    barrierDismissible: false,
+    backgroundColor: kLightColor,
+    confirmBtnColor: kPrimaryColor,
+    confirmBtnText: 'Ya',
+    showCancelBtn: true,
+    cancelBtnText: 'Batal',
+    cancelBtnTextStyle: TextStyle(color: kRedColor),
+    onConfirmBtnTap: function != null ? ()=> function () : null,
+    onCancelBtnTap: (){Navigator.pop(context);},
+  );
+}

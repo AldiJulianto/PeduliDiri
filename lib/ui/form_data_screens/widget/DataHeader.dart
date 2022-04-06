@@ -8,7 +8,7 @@ class DataHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(15,10, 15, 5),
+      margin: EdgeInsets.symmetric(horizontal: 15),
       child: CostumeText(
         text: 'Data Perjalanan Anda',
         textStyle: FmTitleTextStyle

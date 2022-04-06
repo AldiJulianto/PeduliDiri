@@ -33,7 +33,7 @@ class ContainerPerjalanan extends StatelessWidget {
                 text: "Lihat Data", 
                 image: iconBookSch, 
                 function: (){
-                  Navigator.pushNamed(context, TestShowRoute);
+                  Navigator.pushNamed(context, FormDataRoute);
                 }
               )
             ],
@@ -67,7 +67,9 @@ class ContainerPerjalanan extends StatelessWidget {
                 text: 'Ketahui tentang Covid-19', 
                 desc: 'Kenali Covid-19 dengan aplikasi\nPeduli Diri.', 
                 image: iconVirus, 
-                function: (){}
+                function: (){
+                  Navigator.popAndPushNamed(context, TestShowRoute);
+                }
               ),
 
               SizedBox(height: 15,),

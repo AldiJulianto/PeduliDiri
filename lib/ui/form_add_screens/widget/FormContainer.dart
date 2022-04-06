@@ -13,6 +13,7 @@ import 'package:peduli_diri/ui/widgets/CostumeAlertDialog.dart';
 import 'package:peduli_diri/ui/widgets/CostumeButon.dart';
 import 'package:peduli_diri/ui/widgets/CostumeText.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:peduli_diri/utility/route_name.dart';
 
 
 class FormContainer extends StatefulWidget {
@@ -100,13 +101,7 @@ class _FormContainerState extends State<FormContainer> {
         PerjalananModel pModel = PerjalananModel(id, lokasi, tanggal, jam, jenisPerjalanan, catatan, suhu);
         dbHelper.insertData(pModel).then((perjalananData){
           print('SUKSES LURD');
-          CostumeAlertDialog(
-          context, 
-          CoolAlertType.success, 
-          "Sukses", 
-          'Data Berhasil ditambahkan', 
-          'Tutup'
-        );
+          CostumeAlertAdd(context, (){Navigator.pushNamedAndRemoveUntil(context, FormDataRoute, (route) => false);});
         }).catchError((error) {
           CostumeAlertDialog(context, CoolAlertType.error, error,
               'GAGAl BOSKU', 'Tutup');

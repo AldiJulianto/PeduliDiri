@@ -154,7 +154,7 @@ class DbHelper {
 
   Future <List<PerjalananModel>> getPerjalanan() async {
     var dbClient = await db;
-    var result = await dbClient!.query(tablePerjalanan, orderBy: '$CId ASC');
+    var result = await dbClient!.query(tablePerjalanan, orderBy: '$CTanggal DESC');
     List<PerjalananModel> perjalananList = result.isNotEmpty ? result.map((e) => PerjalananModel.fromMap(e)).toList() : [];
     inspect(perjalananList);
     return perjalananList;

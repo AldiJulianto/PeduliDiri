@@ -60,36 +60,34 @@ const  buatSp(
 
 
 
-Drawer CostumeDrawerBar = Drawer(
-  backgroundColor: kPrimaryColor,
-  child: Container(
-    decoration: BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          kPrimaryColor, kSecondColor
-        ]
-      )
-    ),
-    child: ListView(
-      children: [
-        UserAccountsDrawerHeader(
-          decoration: BoxDecoration(color: Colors.transparent),
-          accountName: CostumeText(
-            text: 'NIK',
-            textStyle: DrawerNikTextStyle
-          ), 
-          accountEmail: CostumeText(
-            text: 'NAMA', 
-            textStyle: DrawerNamaTextStyle
-          ),
-          currentAccountPicture: CircleAvatar(
-                  backgroundColor: kWhiteColor,
-          ),
-        ),
-        CostumeDrawer()
-      ],
-    ),
-  ),
-);
+// Drawer CostumeDrawerBar = Drawer(
+//   backgroundColor: kPrimaryColor,
+//   child: Container(
+//     decoration: BoxDecoration(
+//       gradient: LinearGradient(
+//         begin: Alignment.topLeft,
+//         end: Alignment.bottomRight,
+//         colors: [
+//           kPrimaryColor, kSecondColor
+//         ]
+//       )
+//     ),
+//     child: ListView(
+//       children: [
+//         UserAccountsDrawerHeader(
+//           decoration: BoxDecoration(color: Colors.transparent),
+//           accountName: CostumeText(
+//             text: 'NIK',
+//             textStyle: DrawerNikTextStyle
+//           ), 
+//           accountEmail: CostumeText(
+//             text: 'NAMA', 
+//             textStyle: DrawerNamaTextStyle
+//           ),
+//           currentAccountPicture: Icon(Icons.account_circle_rounded, color: kWhiteColor, size: 80,),
+//         ),
+//         CostumeDrawer()
+//       ],
+//     ),
+//   ),
+// );

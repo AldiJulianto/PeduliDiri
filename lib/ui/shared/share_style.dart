@@ -112,8 +112,8 @@ TextStyle DrawerNikTextStyle = TextStyle(
 TextStyle DrawerNamaTextStyle = TextStyle(
   fontFamily: fontPopppins,
   fontSize: 13.0,
-  color: kBlackPrimaryColor,
-  fontWeight: FontWeight.w400,
+  color: kWhiteColor,
+  fontWeight: FontWeight.w500,
 );
 
 //Style buat deskripsi container Dasboard

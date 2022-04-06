@@ -3,13 +3,19 @@ import 'package:peduli_diri/ui/shared/share_style.dart';
 import 'package:peduli_diri/utility/constans.dart';
 
 class CostumeSearch extends StatefulWidget {
-  const CostumeSearch({ Key? key }) : super(key: key);
+
+  final TextEditingController controller;
+  const CostumeSearch({
+    Key? key,
+    required this.controller
+  });
 
   @override
   State<CostumeSearch> createState() => _CostumeSearchState();
 }
 
 class _CostumeSearchState extends State<CostumeSearch> {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,6 +24,7 @@ class _CostumeSearchState extends State<CostumeSearch> {
       width: 180,
 
       child:  TextField(
+        controller: widget.controller,
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.symmetric(horizontal: 10),
           enabledBorder: const OutlineInputBorder(
@@ -33,7 +40,7 @@ class _CostumeSearchState extends State<CostumeSearch> {
               color: kPrimaryColor
             ),
           ),
-          suffixIcon: const Icon(Icons.search_rounded, color: kPrimaryColor,),
+          prefixIcon: const Icon(Icons.search_rounded, color: kPrimaryColor,),
           hintText: 'Cari data perjalanan',
           hintStyle: LrHintTextStyle
       ),
