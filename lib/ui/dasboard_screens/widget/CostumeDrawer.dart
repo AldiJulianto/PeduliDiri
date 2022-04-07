@@ -30,7 +30,9 @@ class CostumeDrawer extends StatelessWidget {
         CostumeListTile(
           iconData: Icons.info_rounded,
           text: 'Tentang', 
-          function: (){},
+          function: (){
+            Navigator.pushNamed(context, TestShowRoute);
+          },
         ),
         CostumeListTile(
           iconData: Icons.logout_rounded, 

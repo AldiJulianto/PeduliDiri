@@ -113,13 +113,13 @@ class CostumeCardCarosel extends StatelessWidget {
                       children: [
                         SizedBox(height: 30,),
                         CostumeText(
-                          text: 'Catat semua perjalanan', 
+                          text: 'Data mu tersimpan disini', 
                           textStyle: DsTitleCtTextStyle
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 5, bottom: 10),
                           child: CostumeText(
-                            text: 'Catat semua perjalanananmu\ndengan Aplikasi Peduli Diri.', 
+                            text: 'Catatan perjalananmu disimpan\n di Aplikasi Peduli Diri.', 
                             textStyle: DsDescCtTextStyle
                           ),
                         ),
@@ -170,13 +170,13 @@ class CostumeCardCarosel extends StatelessWidget {
                       children: [
                         SizedBox(height: 30,),
                         CostumeText(
-                          text: 'Catat semua perjalanan', 
+                          text: 'Ketahui tentang Covid-19', 
                           textStyle: DsTitleCtTextStyle
                         ),
                         Container(
-                          margin: EdgeInsets.only(top: 5, bottom: 10),
+                          margin: EdgeInsets.only(top: 5, ),
                           child: CostumeText(
-                            text: 'Catat semua perjalanananmu\ndengan Aplikasi Peduli Diri.', 
+                            text: 'Dengan Aplikasi Peduli Diri\nanda dapat mengetahui\ntentang Covid-19', 
                             textStyle: DsDescCtTextStyle
                           ),
                         ),

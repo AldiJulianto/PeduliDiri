@@ -159,4 +159,12 @@ class DbHelper {
     inspect(perjalananList);
     return perjalananList;
   }
+
+  Future <List<PerjalananModel>> getOneRow(String? text) async {
+    var dbClient = await db;
+    var result = await dbClient!.query(tablePerjalanan, where: '$CLokasi LIKE ?', whereArgs: ['%$text%']);
+    List<PerjalananModel> list = result.isNotEmpty ? result.map((e) => PerjalananModel.fromMap(e)).toList():[];
+    inspect(list);
+    return list;
+  }
 }

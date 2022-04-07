@@ -1,102 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_diri/models/perjalanan_model.dart';
 import 'package:peduli_diri/services/database_handler.dart';
+import 'package:peduli_diri/ui/form_data_screens/Perjalanan_list.dart';
+import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
+import 'package:peduli_diri/utility/constans.dart';
 
-class FullList extends StatefulWidget {
+class SearchData extends StatefulWidget {
+  const SearchData({ Key? key }) : super(key: key);
+
   @override
-  _FullListState createState() => _FullListState();
+  State<SearchData> createState() => _SearchDataState();
 }
 
-class _FullListState extends State<FullList> {
-  String userSearchInput = "";
-  TextEditingController _searchInputController = TextEditingController();
-
-  var  dbHelper;
-  List<PerjalananModel> list = [];
-  List<PerjalananModel> filteredList = <PerjalananModel>[];
-  bool doItJustOnce = false;
-
-  void _filterList(value) {
-    setState(() {
-      filteredList = list
-          .where((text) => text.lokasi!.toLowerCase().contains(value!.toLowerCase()))
-          .toList(); // I don't understand your Word list.
-    });
-  }
+class _SearchDataState extends State<SearchData> {
+  String? text;
+  var dbHelper;
 
   @override
   void initState() {
-    
-    dbHelper = DbHelper();
+    // TODO: implement initState
     super.initState();
+    dbHelper = DbHelper();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        primary: true,
-        title: InkWell(
-          child: TextField(
-            autofocus: false,
-            enableInteractiveSelection: false,
-            controller: _searchInputController,
-            onChanged: (value) {
-              _filterList(value);
-            },
-            decoration: InputDecoration(hintText: "Search"),
-          ),
-        ),
-      ),
-      body: Container(
-        child: SafeArea(
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-              height: MediaQuery.of(context).size.height * 0.5,
-            child: FutureBuilder<List<PerjalananModel>>(
-
-                future: dbHelper.getPerjalanan(),
-                builder: (BuildContext context, AsyncSnapshot<List<PerjalananModel>> snapshot) {
-                  if (snapshot.hasData) {
-                    if (!doItJustOnce) {
-                      //You should define a bool like (bool doItJustOnce = false;) on your state.
-                      list = snapshot.data!;
-                      filteredList = list;
-                      doItJustOnce = !doItJustOnce; //this line helps to do just once.
-                    }
-                    return Container(
-                      height: 200,
-                      child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: filteredList.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return GestureDetector(
-                          onTap: () {
-                            /*take action*/
-                          },
-                          // child: staggeredList(
-                          //   position: index,
-                          //   duration: const Duration(milliseconds: 300),
-                          //   child: SlideAnimation(
-                          //     verticalOffset: 50.0,
-                          //     child: FadeInAnimation(
-                          //       child: listChild(filteredList[index].eng, filteredList[index].ger),
-                          //     ),
-                          //   ),
-                          // ),
-                        );
+      body: SafeArea(
+        child: ListView(
+          children: [
+            Container(
+              child: Column(
+                children: [
+                  ButtonBackAppBar(Icons.arrow_back_ios_new_rounded, kPrimaryColor),
+                  Container(
+                    margin: const EdgeInsets.all(15),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'keyword'
+                      ),
+                      onChanged: (value) {
+                        text = value;
+                        setState(() {
+                          
+                        });
                       },
                     ),
-                    );
-                    
-                  }
-                  return Center(child: CircularProgressIndicator());
-                }),
-          ),
+                  ),
+                  // FutureBuilder(
+                  //   future: dbHelper.getOneRow(text),
+                  //   builder: (context, snapshot) {
+                  //     if (snapshot.hasError) print('Error');
+                  //     var data = snapshot.data;
+                  //     return snapshot.hasData ? PerjalananList() : const Center(child: const Text('Kosong'),);
+                  //   },
+                  // )
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );
   }
-  }
+}

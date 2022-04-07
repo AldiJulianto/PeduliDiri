@@ -3,6 +3,7 @@ import 'package:peduli_diri/ui/form_add_screens/widget/FormContainer.dart';
 import 'package:peduli_diri/ui/form_add_screens/widget/FormHeader.dart';
 import 'package:peduli_diri/ui/widgets/button_back_widget.dart';
 import 'package:peduli_diri/utility/constans.dart';
+import 'package:peduli_diri/utility/route_name.dart';
 
 class FormAddView extends StatefulWidget {
 
@@ -26,7 +27,7 @@ class _FormAddViewState extends State<FormAddView> {
                     Icons.arrow_back_ios_new_rounded,
                     kPrimaryColor,
                     backFunction: (){
-                      Navigator.pop(context);
+                      Navigator.pushNamedAndRemoveUntil(context, DasboardRoute, (route) => false);
                     },
                   ),
 

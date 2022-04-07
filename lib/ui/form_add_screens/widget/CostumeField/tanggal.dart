@@ -53,8 +53,8 @@ class _FieldTanggalState extends State<FieldTanggal> {
             cancelText: 'Batal',
             context: context,
              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
-               lastDate: DateTime(2101),
+              firstDate: DateTime(2022),
+               lastDate: DateTime(2023),
           );
 
           if(pickedDate != null ){

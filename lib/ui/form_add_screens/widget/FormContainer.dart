@@ -157,12 +157,12 @@ class _FormContainerState extends State<FormContainer> {
               ],
             )),
 
-            CostumeText(
-              text: 'Jenis kegiatan', 
-              textStyle: FmTitleFdTextStyle
-            ),
+            // CostumeText(
+            //   text: 'Jenis kegiatan', 
+            //   textStyle: FmTitleFdTextStyle
+            // ),
 
-            TestJenis(),
+            // TestJenis(),
 
 
             CostumeText(

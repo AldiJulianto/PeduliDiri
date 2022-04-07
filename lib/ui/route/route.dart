@@ -27,7 +27,7 @@ class RouterGenerator {
       case FormDataRoute:
         return MaterialPageRoute(builder: (_) => FormDataView());
       case TestShowRoute:
-        return MaterialPageRoute(builder: (_) => FullList());
+        return MaterialPageRoute(builder: (_) => SearchData());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
